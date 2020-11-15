@@ -12,7 +12,7 @@ from multiprocessing import *
 TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XvTrvg.VF5bY1A6KpvyVGKOUn0e1lpVFpE'
 GUILD = 'Bot Test Server'
 
-key = '02255bb1-7d7c-4da8-ba97-4c33df70ebac'
+key = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.FZwF40P5YYNuFpRLC-GB-XXS3LA'
 
 client = commands.Bot(command_prefix='!')
 
