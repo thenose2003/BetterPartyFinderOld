@@ -7,7 +7,7 @@ version = '0.0.1'
 dataFolder = 'data'
 
 HOST = '66.175.233.189'
-PORT = 9999
+PORT = 443
 
 class RankingServer:
     def __init__(self, version, dataFolder):
