@@ -9,7 +9,7 @@ import time
 import RankingServer
 from multiprocessing import *
 
-TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XvTrvg.VF5bY1A6KpvyVGKOUn0e1lpVFpE'
+TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.SmcFxucDrcmz1ZTCQzp8LopAxGY'
 GUILD = 'Bot Test Server'
 
 key = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.FZwF40P5YYNuFpRLC-GB-XXS3LA'
