@@ -6,7 +6,7 @@ import json
 version = '0.0.1'
 dataFolder = 'data'
 
-HOST = '127.0.0.1'
+HOST = '66.175.233.189'
 PORT = 9999
 
 class RankingServer:
