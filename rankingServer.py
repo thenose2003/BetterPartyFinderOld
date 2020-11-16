@@ -15,7 +15,7 @@ def getUUID(ign):
     return requests.get("https://api.mojang.com/users/profiles/minecraft/"+ign).json()['id']
     return -1
 
-class RankingServer:
+class rankingServer:
     def __init__(self):
         self.version = version
         self.dataFolder = dataFolder
