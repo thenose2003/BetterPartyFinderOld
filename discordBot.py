@@ -6,13 +6,13 @@ from discord.utils import get
 import json
 import pickle
 import time
-import RankingServer
+import rankingServer
 from multiprocessing import *
 
-TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.SmcFxucDrcmz1ZTCQzp8LopAxGY'
+TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XvTrvg.VF5bY1A6KpvyVGKOUn0e1lpVFpE'
 GUILD = 'Bot Test Server'
 
-key = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.FZwF40P5YYNuFpRLC-GB-XXS3LA'
+key = '02255bb1-7d7c-4da8-ba97-4c33df70ebac'
 
 client = commands.Bot(command_prefix='!')
 
@@ -354,7 +354,7 @@ async def qleave(ctx):
 
 if __name__ == "__main__":
     global rs
-    rs = RankingServer.RankingServer('0.0.1','data')
+    rs = rankingServer.rankingServer()
 
     data = openData(rs)
 

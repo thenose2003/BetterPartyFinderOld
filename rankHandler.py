@@ -3,10 +3,11 @@ class handler():
         self.version = version
 
     def result(self, skill, averageSkill, work, totalWork, **kwargs):
-        return skill + ((averageSkill/skill)*(((work*100)/totalWork)-20))
+        return skill + ((int(averageSkill)/int(skill))*(((work*100)/totalWork)-20))
 
+#[getUUID(ign), str(ctx.author), 100]
     def newSkill(self, profile, work, totalWork, **kwargs):
-        return self.result(profile[1], profile[1], work, totalWork)
+        return self.result(profile[2], profile[2], work, totalWork)
 
     def findProfile(self, list, uuid):
         for i in list:
