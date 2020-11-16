@@ -2,15 +2,21 @@ import pickle
 import rankHandler
 import socket
 import json
+from multiprocessing import *
+import requests
 
-version = '0.0.1'
+version = '0.0.2'
 dataFolder = 'data'
 
-HOST = '66.175.233.189'
+HOST = '127.0.0.1'
 PORT = 443
 
+def getUUID(ign):
+    return requests.get("https://api.mojang.com/users/profiles/minecraft/"+ign).json()['id']
+    return -1
+
 class RankingServer:
-    def __init__(self, version, dataFolder):
+    def __init__(self):
         self.version = version
         self.dataFolder = dataFolder
 
@@ -43,6 +49,7 @@ class RankingServer:
     def rankChange(self, rH, uuid, floor, work, totalWork):
         profile = rH.findProfile(getattr(self, 'floor'+str(floor)), uuid)
         #print(getattr(self, 'floor'+str(floor))[profile])
+        #def newSkill(self, profile, work, totalWork, **kwargs):
         getattr(self, 'floor'+str(floor))[profile][1] = rH.newSkill(getattr(self, 'floor'+str(floor))[profile], 600, 1000)
         #print(getattr(self, 'floor'+str(floor))[profile])
         self.save()
@@ -54,26 +61,34 @@ class RankingServer:
                 s.bind((HOST, PORT))
                 s.listen()
                 conn, addr = s.accept()
-                with conn:
-                    print('Connected by', addr)
-                    while True:
-                        data = conn.recv(100)#length of uuid
+#returns data
+                self.handleSocket(conn, addr, s, rH)
+                #p = Process(target=self.handleSocket, args=(conn, addr, s,))
+                #p.start()
 
-                        if not data:
-                            break
+    def handleSocket(self, conn, addr, s, rH):
+        with conn:
+            print('Connected by', addr)
+            data = conn.recv(100).decode()#length of imput
 
-                        rData = data #saves data
-                        print(rData)
-                        rData = json.loads(rData.decode('utf-8'))
+            #if not data:
+            #    break
 
-                        #updates rank
-                        self.rankChange(rH, rData[0], rData[1], rData[2], rData[3])
+            rData = data #saves data
+            rData = rData.split('\001')
+            print(rData)
+            #updates rank
+            #rankChange(self, rH, uuid, floor, work, totalWork):
+            #list = b'NoseThe\0011\001600\0013000'
+            self.rankChange(rH, getUUID(rData[0]), int(rData[1]), int(rData[2]), int(rData[3]))
 
-                        #sets the veriable to return
-                        profile = rH.findProfile(getattr(self, 'floor'+str(rData[1])), rData[0])
-                        send = getattr(self, 'floor'+str(rData[1]))[profile]
+            #sets the veriable to return
+            profile = rH.findProfile(getattr(self, 'floor'+rData[1]), rData[0])
+            send = getattr(self, 'floor'+rData[1])[profile]
 
-                        conn.sendall(json.dumps(str(send)).encode()) #returns data
+                #conn.sendall(toBytes(str(send))) #returns data
+            conn.sendall(str(rData).encode())
+        s.close()
 
 if __name__ == '__main__':
     testList =[ #uuid, skill
@@ -82,4 +97,4 @@ if __name__ == '__main__':
 
     #pickle.dump(testList, open("data/floor1.dat", "wb"))
 
-    rs = RankingServer(version, dataFolder).run()
+    rs = RankingServer().run()
