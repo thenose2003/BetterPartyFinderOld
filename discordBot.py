@@ -358,7 +358,7 @@ if __name__ == "__main__":
 
     data = openData(rs)
 
-    #p = Process(target=rs.run)
-    #p.start()
+    p = Process(target=rs.run)
+    p.start()
 
     client.run(TOKEN)
