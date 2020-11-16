@@ -97,4 +97,4 @@ if __name__ == '__main__':
 
     #pickle.dump(testList, open("data/floor1.dat", "wb"))
 
-    rs = RankingServer().run()
+    rs = rankingServer().run()
