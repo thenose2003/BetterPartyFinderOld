@@ -8,7 +8,7 @@ import requests
 version = '0.0.2'
 dataFolder = 'data'
 
-HOST = '127.0.0.1'
+HOST = '66.175.233.189'
 PORT = 443
 
 def getUUID(ign):
