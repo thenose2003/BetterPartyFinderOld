@@ -1,6 +1,0 @@
-    To-Do
-- create leave que
-- add classes to waiting list
-- client -> server connection
-- pop queue once filled
-- server -> client connection
