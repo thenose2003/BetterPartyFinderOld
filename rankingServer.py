@@ -5,10 +5,10 @@ import json
 from multiprocessing import *
 import requests
 
-version = '0.0.2'
+version = '0.0.3'
 dataFolder = 'data'
 
-HOST = '66.175.233.189'
+HOST = '127.0.0.1'
 PORT = 443
 
 def getUUID(ign):
@@ -47,10 +47,12 @@ class rankingServer:
         pickle.dump(self.floor6, open(dataFolder + "/floor6.dat", "wb"))
 
     def rankChange(self, rH, uuid, floor, work, totalWork):
+        self.load()
         profile = rH.findProfile(getattr(self, 'floor'+str(floor)), uuid)
-        #print(getattr(self, 'floor'+str(floor))[profile])
+        print(getattr(self, 'floor'+str(floor)))
+        print(profile)
         #def newSkill(self, profile, work, totalWork, **kwargs):
-        getattr(self, 'floor'+str(floor))[profile][1] = rH.newSkill(getattr(self, 'floor'+str(floor))[profile], 600, 1000)
+        getattr(self, 'floor'+str(floor))[profile][2] = rH.newSkill(getattr(self, 'floor'+str(floor))[profile], 600, 1000)
         #print(getattr(self, 'floor'+str(floor))[profile])
         self.save()
 
@@ -74,21 +76,28 @@ class rankingServer:
             #if not data:
             #    break
 
-            rData = data #saves data
-            rData = rData.split('\001')
+            rData = data
+            rData = rData[:-2] #saves data
+            rData = rData.split(':')
+
             print(rData)
             #updates rank
             #rankChange(self, rH, uuid, floor, work, totalWork):
-            #list = b'NoseThe\0011\001600\0013000'
+            #list = b'NoseThe:1:600:3000
             self.rankChange(rH, getUUID(rData[0]), int(rData[1]), int(rData[2]), int(rData[3]))
 
             #sets the veriable to return
-            profile = rH.findProfile(getattr(self, 'floor'+rData[1]), rData[0])
-            send = getattr(self, 'floor'+rData[1])[profile]
+            profile = rH.findProfile(getattr(self, 'floor'+rData[1]), getUUID(rData[0]))
+            send = ''
+            for i in getattr(self, 'floor'+rData[1])[profile]:
+                send += str(i)+':'
+            send = send[:-1]
+            send += '\n'
 
                 #conn.sendall(toBytes(str(send))) #returns data
-            conn.sendall(str(rData).encode())
-        s.close()
+            print(send)
+            conn.sendall(str(send).encode())
+        #s.close()
 
 if __name__ == '__main__':
     testList =[ #uuid, skill
