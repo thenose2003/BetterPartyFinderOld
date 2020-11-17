@@ -5,10 +5,10 @@ import json
 from multiprocessing import *
 import requests
 
-version = '0.0.4'
+version = '0.0.3'
 dataFolder = 'data'
 
-HOST = '127.0.0.1'
+HOST = '66.175.233.189'
 PORT = 443
 
 def getUUID(ign):
