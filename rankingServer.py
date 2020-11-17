@@ -86,6 +86,7 @@ class rankingServer:
             #rankChange(self, rH, uuid, floor, work, totalWork):
             #list = b'NoseThe:1:600:3000
             self.rankChange(rH, getUUID(rData[0]), int(rData[1]), int(rData[2]), int(rData[3]))
+            self.save()
 
             #sets the veriable to return
             profile = rH.findProfile(getattr(self, 'floor'+rData[1]), getUUID(rData[0]))
