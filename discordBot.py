@@ -89,7 +89,7 @@ async def save(ctx):
         saveData(data)
         await ctx.send('Data has been saved!')
 
-@client.command(pass_context=True, aliases=['r', 'reg'])
+@client.command(pass_context=True)
 async def register(ctx, ign):
     global rs
     data = openData(rs)
@@ -352,13 +352,29 @@ async def qleave(ctx):
     embed=discord.Embed(title='You are not currently in queue. ¯\_(ツ)_/¯', color=0xff00ff)
     await ctx.send(embed = embed)
 
+@client.command(pass_context=True, aliases=['r'])
+async def rank(ctx):
+    msg = await ctx.send(embed=discord.Embed(title="Searching for information", color=0xff00ff))
+    data = openData(rs)
+    send = ''
+    for fData in data: #finds authors data
+        for aData in fData:
+            if aData[1] == str(ctx.author):
+                print(data.index(fData))
+                send += 'Floor '+str(data.index(fData)+1)+': '+str(aData[2])+'\n'
+                #[uuid(getUUID(ign)), discord tag(ctx.author), skill]
+                break
+    embed = discord.Embed(title='Ranking Data', color=0xff00ff)
+    embed.add_field(name='All found information', value=send)
+    await msg.edit(embed=embed)
+
 if __name__ == "__main__":
     global rs
     rs = rankingServer.rankingServer()
 
     data = openData(rs)
 
-    p = Process(target=rs.run)
-    p.start()
+    #p = Process(target=rs.run)
+    #p.start()
 
     client.run(TOKEN)
