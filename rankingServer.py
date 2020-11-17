@@ -12,6 +12,7 @@ HOST = '66.175.233.189'
 PORT = 443
 
 def getUUID(ign):
+    print(ign)
     return requests.get("https://api.mojang.com/users/profiles/minecraft/"+ign).json()['id']
     return -1
 
