@@ -78,7 +78,7 @@ class rankingServer:
             #    break
 
             rData = data
-            rData = rData[:-2] #saves data
+            rData = rData.split('\\')[0] #saves data
             rData = rData.split(':')
 
             print(rData)
