@@ -19,3 +19,6 @@ pickle.dump(data, open(dataFolder + "/floor5.dat", "wb"))
 
 data = [['9983f7e223de466bb66a81120fbf7f9c', 'NotTheNose#6857', 105]]
 pickle.dump(data, open(dataFolder + "/floor6.dat", "wb"))
+
+data = [['9983f7e223de466bb66a81120fbf7f9c', 'NotTheNose#6857', 106]]
+pickle.dump(data, open(dataFolder + "/floor7.dat", "wb"))
