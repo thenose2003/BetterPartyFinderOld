@@ -53,7 +53,7 @@ def openData(rs):
     global floor6
     floor6 = rs.floor6
     global floor7
-    floor6 = rs.floor7
+    floor7 = rs.floor7
 
     return [floor1, floor2, floor3, floor4, floor5, floor6, floor7]
 
@@ -380,7 +380,8 @@ if __name__ == "__main__":
 
     data = openData(rs)
 
-    #p = Process(target=rs.run)
-    #p.start()
+    p = Process(target=rs.run)
+    p.start()
 
     client.run(TOKEN)
+8
