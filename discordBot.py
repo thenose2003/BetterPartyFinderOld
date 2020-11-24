@@ -22,6 +22,7 @@ qFloor3 = []
 qFloor4 = []
 qFloor5 = []
 qFloor6 = []
+qFloor7 = []
 
 dataFolder = 'data'
 
@@ -36,6 +37,7 @@ def saveData(data):
     pickle.dump(data[3], open(dataFolder + "/floor4.dat", "wb"))
     pickle.dump(data[4], open(dataFolder + "/floor5.dat", "wb"))
     pickle.dump(data[5], open(dataFolder + "/floor6.dat", "wb"))
+    pickle.dump(data[6], open(dataFolder + "/floor7.dat", "wb"))
 
 def openData(rs):
     global floor1
@@ -50,8 +52,10 @@ def openData(rs):
     floor5 = rs.floor5
     global floor6
     floor6 = rs.floor6
+    global floor7
+    floor6 = rs.floor7
 
-    return [floor1, floor2, floor3, floor4, floor5, floor6]
+    return [floor1, floor2, floor3, floor4, floor5, floor6, floor7]
 
 def getUUID(ign):
     return requests.get("https://api.mojang.com/users/profiles/minecraft/"+ign).json()['id']
@@ -137,6 +141,7 @@ async def q(ctx, dungeonClass, floor, want):
     global qFloor4
     global qFloor5
     global qFloor6
+    global qFloor7
 
     #Setting up variables for actually queueing
     floorQ = globals()['qFloor'+str(floor)]
@@ -323,6 +328,7 @@ async def qlist(ctx):
     global qFloor4
     global qFloor5
     global qFloor6
+    global qFloor7
     words = ''
     msg = await ctx.send(embed=discord.Embed(title="Searching for your queue.", color=0xff00ff))
     for i in range(6):
@@ -374,7 +380,7 @@ if __name__ == "__main__":
 
     data = openData(rs)
 
-    p = Process(target=rs.run)
-    p.start()
+    #p = Process(target=rs.run)
+    #p.start()
 
     client.run(TOKEN)
