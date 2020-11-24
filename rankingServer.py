@@ -8,7 +8,7 @@ import requests
 version = '0.0.3'
 dataFolder = 'data'
 
-HOST = '66.175.233.189'
+HOST = '127.0.0.1'
 PORT = 443
 
 def getUUID(ign):
@@ -27,6 +27,7 @@ class rankingServer:
         self.floor4 = pickle.load(open(dataFolder + "/floor4.dat", "rb"))
         self.floor5 = pickle.load(open(dataFolder + "/floor5.dat", "rb"))
         self.floor6 = pickle.load(open(dataFolder + "/floor6.dat", "rb"))
+        self.floor7 = pickle.load(open(dataFolder + "/floor7.dat", "rb"))
 
         print('All user data loaded.')
         print('Listening on ', HOST, ':', PORT)
@@ -38,6 +39,7 @@ class rankingServer:
         self.floor4 = pickle.load(open(dataFolder + "/floor4.dat", "rb"))
         self.floor5 = pickle.load(open(dataFolder + "/floor5.dat", "rb"))
         self.floor6 = pickle.load(open(dataFolder + "/floor6.dat", "rb"))
+        self.floor7 = pickle.load(open(dataFolder + "/floor7.dat", "rb"))
 
     def save(self):
         pickle.dump(self.floor1, open(dataFolder + "/floor1.dat", "wb"))
@@ -46,6 +48,7 @@ class rankingServer:
         pickle.dump(self.floor4, open(dataFolder + "/floor4.dat", "wb"))
         pickle.dump(self.floor5, open(dataFolder + "/floor5.dat", "wb"))
         pickle.dump(self.floor6, open(dataFolder + "/floor6.dat", "wb"))
+        pickle.dump(self.floor7, open(dataFolder + "/floor7.dat", "wb"))
 
     def rankChange(self, rH, uuid, floor, work, totalWork):
         self.load()
