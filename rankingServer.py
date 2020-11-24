@@ -5,7 +5,7 @@ import json
 from multiprocessing import *
 import requests
 
-version = '0.0.3'
+version = '0.0.4'
 dataFolder = 'data'
 
 HOST = '127.0.0.1'
