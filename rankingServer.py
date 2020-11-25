@@ -56,7 +56,7 @@ class rankingServer:
         print(getattr(self, 'floor'+str(floor)))
         print(profile)
         #def newSkill(self, profile, work, totalWork, **kwargs):
-        getattr(self, 'floor'+str(floor))[profile][2] = rH.newSkill(getattr(self, 'floor'+str(floor))[profile], work, totalWork)
+        getattr(self, 'floor'+str(floor))[profile][2] = int(rH.newSkill(getattr(self, 'floor'+str(floor))[profile], work, totalWork))
         #print(getattr(self, 'floor'+str(floor))[profile])
         self.save()
 
