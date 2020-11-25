@@ -370,7 +370,6 @@ async def rank(ctx):
                 print(data.index(fData))
                 send += 'Floor '+str(data.index(fData)+1)+': '+str(aData[2])+'\n'
                 #[uuid(getUUID(ign)), discord tag(ctx.author), skill]
-                print(send)
                 break
     embed = discord.Embed(title='Ranking Data', color=0xff00ff)
     embed.add_field(name='All found information', value=send)
