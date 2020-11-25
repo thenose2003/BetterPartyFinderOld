@@ -73,36 +73,40 @@ class rankingServer:
                 #p.start()
 
     def handleSocket(self, conn, addr, s, rH):
-        with conn:
-            print('Connected by', addr)
-            data = conn.recv(100).decode()#length of imput
+        try:
+            with conn:
+                print('Connected by', addr)
+                data = conn.recv(100).decode()#length of imput
 
-            #if not data:
-            #    break
+                #if not data:
+                #    break
 
-            rData = data
-            rData = rData.split('\\')[0] #saves data
-            rData = rData.split(':')
+                rData = data
+                rData = rData.split('\\')[0] #saves data
+                rData = rData.split(':')
 
-            print(rData)
-            #updates rank
-            #rankChange(self, rH, uuid, floor, work, totalWork):
-            #list = b'NoseThe:1:600:3000
-            self.rankChange(rH, getUUID(rData[0]), int(rData[1]), int(rData[2]), int(rData[3]))
-            self.save()
+                print(rData)
+                #updates rank
+                #rankChange(self, rH, uuid, floor, work, totalWork):
+                #list = b'NoseThe:1:600:3000
+                self.rankChange(rH, getUUID(rData[0]), int(rData[1]), int(rData[2]), int(rData[3]))
+                self.save()
 
-            #sets the veriable to return
-            profile = rH.findProfile(getattr(self, 'floor'+rData[1]), getUUID(rData[0]))
-            send = ''
-            for i in getattr(self, 'floor'+rData[1])[profile]:
-                send += str(i)+':'
-            send = send[:-1]
-            send += '\n'
+                #sets the veriable to return
+                profile = rH.findProfile(getattr(self, 'floor'+rData[1]), getUUID(rData[0]))
+                send = ''
+                for i in getattr(self, 'floor'+rData[1])[profile]:
+                    send += str(i)+':'
+                send = send[:-1]
+                send += '\n'
 
-                #conn.sendall(toBytes(str(send))) #returns data
-            print(send)
-            conn.sendall(str(send).encode())
+                    #conn.sendall(toBytes(str(send))) #returns data
+                print(send)
+                conn.sendall(str(send).encode())
+        except:
+            print("Error in handleSocket")
         #s.close()
+
 
 if __name__ == '__main__':
     testList =[ #uuid, skill
