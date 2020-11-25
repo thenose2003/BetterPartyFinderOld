@@ -40,6 +40,7 @@ def saveData(data):
     pickle.dump(data[6], open(dataFolder + "/floor7.dat", "wb"))
 
 def openData(rs):
+    rs.load()
     global floor1
     floor1 = rs.floor1
     global floor2
