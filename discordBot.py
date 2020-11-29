@@ -365,14 +365,17 @@ async def qleave(ctx):
     await ctx.send(embed = embed)
 
 @client.command(pass_context=True, aliases=['r'])
-async def rank(ctx):
+async def rank(ctx, *args):
+    if args == ():
+        player = str(ctx.author)
+    else:
+        player = getUUID(args[0])
     msg = await ctx.send(embed=discord.Embed(title="Searching for information", color=0xff00ff))
     data = openData(rs)
     send = ''
     for fData in data: #finds authors data
         for aData in fData:
-            if aData[1] == str(ctx.author):
-                print(data.index(fData))
+            if player in aData:
                 send += 'Floor '+str(data.index(fData)+1)+': '+str(aData[2])+'\n'
                 #[uuid(getUUID(ign)), discord tag(ctx.author), skill]
                 break
