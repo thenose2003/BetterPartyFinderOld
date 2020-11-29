@@ -62,6 +62,10 @@ def getUUID(ign):
     return requests.get("https://api.mojang.com/users/profiles/minecraft/"+ign).json()['id']
     return -1
 
+def getIGN(uuid):
+    names = requests.get('https://api.mojang.com/user/profiles/' + str(uuid) + '/names').json()
+    return names[len(names)-1]['name']
+
 def Diff(li1, li2):
     return (list(list(set(li1)-set(li2)) + list(set(li2)-set(li1))))
 
@@ -131,8 +135,9 @@ async def register(ctx, ign):
         data[i].append([getUUID(ign), str(ctx.author), 100])
     print(data)
     saveData(data)
-    await ctx.message.author.add_roles(discord.utils.get(ctx.author.guild.roles, name='Member'))
     await msg.edit(embed=discord.Embed(title='Account has been created!', color=0xff00ff))
+    await ctx.message.author.edit(nick=getIGN(getUUID(ign)))
+    await ctx.message.author.add_roles(discord.utils.get(ctx.author.guild.roles, name='Member'))
 
 @client.command(pass_context=True, aliases=['que', 'queue', 'joinq', 'joinqueue', 'jq'])
 async def q(ctx, dungeonClass, floor, want):
