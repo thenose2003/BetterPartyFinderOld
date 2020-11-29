@@ -63,14 +63,17 @@ class rankingServer:
     def run(self):
         rH = rankHandler.handler(version)
         while True:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.bind((HOST, PORT))
-                s.listen()
-                conn, addr = s.accept()
-#returns data
-                self.handleSocket(conn, addr, s, rH)
-                #p = Process(target=self.handleSocket, args=(conn, addr, s,))
-                #p.start()
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.bind((HOST, PORT))
+                    s.listen()
+                    conn, addr = s.accept()
+                    #returns data
+                    self.handleSocket(conn, addr, s, rH)
+                    #p = Process(target=self.handleSocket, args=(conn, addr, s,))
+                    #p.start()
+            except:
+                print('[server] Error in rankingServer.run()')
 
     def handleSocket(self, conn, addr, s, rH):
         try:
