@@ -128,7 +128,7 @@ async def register(ctx, ign):
                 await msg.edit(embed=discord.Embed(title='ERROR: Account already exists!', color=0xff00ff))
                 return
     for i in range(len(data)):
-        data[i].append([getUUID(ign), str(ctx.author), 1000])
+        data[i].append([getUUID(ign), str(ctx.author), 100])
     print(data)
     saveData(data)
     await ctx.message.author.add_roles(discord.utils.get(ctx.author.guild.roles, name='Member'))
