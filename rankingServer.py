@@ -9,7 +9,7 @@ import requests
 version = '0.0.5'
 dataFolder = 'data'
 
-HOST = '74.208.27.238' # IP changed to ensure gaming 
+HOST = '' # host ip 
 PORT = 443
 
 def getUUID(ign):
