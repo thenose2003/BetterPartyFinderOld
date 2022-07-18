@@ -11,7 +11,7 @@ from oldQue import *
 from gameActivationHandler import *
 from multiprocessing import *
 
-TOKEN = 'NTkzODEwNTYxOTA5Nzg0NjA0.XRTTLg.SmcFxucDrcmz1ZTCQzp8LopAxGY'
+TOKEN = '' //  Inset bot token
 GUILD = 'Bot Test Server'
 
 key = '02255bb1-7d7c-4da8-ba97-4c33df70ebac'
