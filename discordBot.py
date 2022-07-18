@@ -14,7 +14,7 @@ from multiprocessing import *
 TOKEN = '' //  Inset bot token
 GUILD = 'Bot Test Server'
 
-key = '02255bb1-7d7c-4da8-ba97-4c33df70ebac'
+key = '' // Api Key
 
 client = commands.Bot(command_prefix='!', case_insensitive=True, description='This is a bot designed to run and manage The Better Party Finder made by NoseThe')
 
